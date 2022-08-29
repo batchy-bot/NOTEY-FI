@@ -23,12 +23,20 @@ function addNewMessage(sender, message, type){
 
     let newMessage = ``;
 
-    if (message == '1'){
+    if (sender == 'bot'){
         newMessage = 
         `
         <div class="new-message bot-message">
             <img src="./res/images/bot-icon.png" alt="">
-            ?<div class="message"><button onclick="window.open('${tokenRegistrationLink}')">Sign-in to Google Classroom</button></div>
+            ${message}
+        </div>
+        `
+    }else{
+        newMessage = 
+        `
+        <div class="new-message ${sender}-message">
+            <div class="message">${message}</div>
+            <img src="./res/images/${sender}-icon.png">
         </div>
         `
     }
@@ -60,27 +68,18 @@ function addNewMessage(sender, message, type){
 
 function botResponse(){
     let lastMessage = messageHistory[messageHistory.length-1]['message'].toLowerCase();
-    let response = ''
-
-    if(lastMessage == 'bot'){
-        response = 'Hello';
-    }else if (lastMessage == 'get started'){
-        response = 'Select a platform';
-    }else if(lastMessage == 'subscribe to classroom'){
-        response = 'subscribe to classroom'
-    }else{
-        response = '???';
-    }
+    let resp = `<div class="message">???</div>`;
 
     setTimeout(() => {
         let message = "Select a platform:\n1) Google Classroom \n2) Moodle \n3) Schoology";
+        let messageMode = "";
 
-        if (response == 'Select a platform'){
-            addNewMessage('bot', message, 'receive');
-        }else if(response == 'subscribe to classroom'){
-            addNewMessage('bot', tokenRegistrationLink, 'receive');
+        if (lastMessage == '1'){
+            resp = `<button class="message chat-button" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Google Classroom</button>`
         }else{
-            addNewMessage('bot', response, 'receive')
+            resp = '<div class="message">Invalid Command</div>';
         }
+
+        addNewMessage('bot', resp, 'receive');
     }, 1000);
 }

@@ -57,6 +57,7 @@
     border-radius: 5px;
     flex-wrap: wrap;
 }
+
 .user-message {
     justify-content: flex-end;
 }
@@ -67,7 +68,11 @@
 .bot-message .message{
     background: rgb(168, 168, 168);
 }
-
+.new-message.chat-button{
+    background: grey;
+    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.8);
+    color: blue;
+}
 #chat-box-input-container{
     height: 15%;
     display: flex;

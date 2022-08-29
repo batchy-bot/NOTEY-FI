@@ -49,6 +49,8 @@ async function saveCredentials(client) {
     client_secret: key.client_secret,
     refresh_token: client.credentials.refresh_token,
   });
+
+
   await fs.writeFile(TOKEN_PATH, payload);
 }
 
