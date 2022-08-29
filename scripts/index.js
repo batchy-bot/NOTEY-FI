@@ -2,7 +2,21 @@ const sendMessageBtn = document.querySelector('#send-message-btn');
 const inputMessage = document.querySelector('#input-message');
 const chatBoxContents = document.querySelector('#chat-box-content-container');
 
+tokenRegistrationLink = 'https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http%3A%2F%2Flocalhost%3A65358%2F&access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fclassroom.courses.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fclassroom.coursework.me.readonly&response_type=code&client_id=524422024726-kbjdo5pbmant8nbnli4dppmbicc430ts.apps.googleusercontent.com'
+
 let messageHistory = [];
+let botStates = {
+    1: `<button class='message chat-button get-started-btn'>Get Started</button>`,
+    2: `
+    <div class="message">
+        Select a VLE Platform
+        <button class="message chat-button select-vle-btn" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Google Classroom</button>
+        <button class="message chat-button select-vle-btn" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Moodle</button>
+        <button class="message chat-button select-vle-btn" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Schoology</button>
+    </div>
+    `
+}
+let currentBotState = 1;
 
 /** User sends messsage */
 sendMessageBtn.addEventListener('click', e => {
@@ -14,7 +28,6 @@ inputMessage.addEventListener('keydown', e => {
     }
 })
 
-tokenRegistrationLink = 'https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http%3A%2F%2Flocalhost%3A65358%2F&access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fclassroom.courses.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fclassroom.coursework.me.readonly&response_type=code&client_id=524422024726-kbjdo5pbmant8nbnli4dppmbicc430ts.apps.googleusercontent.com'
 
 function userSendMessage(sender, message, type){
     messageHistory.push({sender: sender, message: message});
@@ -46,22 +59,6 @@ function addNewMessage(sender, message, type){
     }
 
 
-/*
-    if (type == 'send'){
-        newMessage = 
-        `<div class="new-message ${sender}-message">
-            <div class="message">${message}</div>    
-            <img src="./res/images/${sender}-icon.png" alt="">
-        </div>`
-    }else{
-        newMessage = 
-        `<div class="new-message ${sender}-message">
-            <img src="./res/images/${sender}-icon.png" alt="">
-            <div class="message">${message}</div>
-        </div>`
-    }
-*/
-
     chatBoxContents.innerHTML += newMessage
     
     messageHistory.push({sender: sender, message: message});
@@ -69,13 +66,17 @@ function addNewMessage(sender, message, type){
     inputMessage.value = null;
 }
 
-addNewMessage('bot', `<button class='message chat-button get-started-btn'>Get Started</button>`, 'receive')
+addNewMessage('bot', botStates[currentBotState], 'receive');
 
-const getStartedBtn = document.querySelector('.get-started-btn')
+const getStartedBtn = document.querySelectorAll('.get-started-btn')
 
-getStartedBtn.addEventListener('click', e => {
-    userSendMessage('user', 'get started', 'send')
+getStartedBtn.forEach( startBtn => {
+    startBtn.addEventListener('click', e => {
+        userSendMessage('user', 'get started', 'send');
+        currentBotState++;
+    })
 })
+
 
 function botResponse(){
     let lastMessage = messageHistory[messageHistory.length-1]['message'].toLowerCase();
@@ -89,17 +90,11 @@ function botResponse(){
             resp = `<button class="message chat-button" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Google Classroom</button>`
         }else if (lastMessage.toLowerCase() == 'get started'){
             resp = 
-            `
-            <div class="message">
-                Select a VLE Platform
-                <button class="message chat-button select-vle-btn" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Google Classroom</button>
-                <button class="message chat-button select-vle-btn" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Moodle</button>
-                <button class="message chat-button select-vle-btn" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Schoology</button>
-            </div>
-            `
+            botStates[currentBotState];
         }else{
             resp = '<div class="message">Invalid Command</div>';
         }
+
 
         addNewMessage('bot', resp, 'receive');
         document.querySelectorAll('.select-vle-btn').forEach( btn => {
@@ -107,9 +102,8 @@ function botResponse(){
                 let platformName = btn.innerHTML.split('Sign-in to')
                 platformName = platformName[platformName.length - 1]
                 addNewMessage('bot', `<div class='message'>You have successfully signed in to \n'${platformName}'</div>`, 'receive');
-                addNewMessage('bot', `<div class='message'>You will receive notifications </div>`, 'receive');
+                addNewMessage('bot', `<div class='message'>You will now receive notifications activities, announcements and quizzes from '${platformName}'</div>`, 'receive');
             });
         });
     }, 1000);
 }
-
