@@ -117,3 +117,14 @@ body{
     color: white;
     border-radius: 20%;
 }
+
+@media only screen and (max-width: 720px) {
+    #body-container{
+        display: flex;
+        justify-content: center;
+    }
+    #chat-box-container{
+        bottom: 0;
+        right: inherit;
+    }
+  }
