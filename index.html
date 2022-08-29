@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/index.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="head-container"></div>
+    <div id="body-container">
+        
+        <!--CHAT BOX-->
+        <div id="chat-box-container">
+
+            <div id="chat-box-header">
+                <span id="chat-name">NOTEY-FI</span>
+                <div id="chat-box-header-buttons">
+                    <span id="exit-chat-box-btn">X</span>
+                </div>
+            </div>
+
+            <div id="chat-box-content-container">
+
+                <div class="new-message bot-message">
+                    <img src="./res/images/bot-icon.png" alt="">
+                    <div class="message">Type Get Started</div>
+                </div>
+
+                <!--
+                <div class="new-message user-message">
+                    <div class="message user-message-content">Hello There</div>
+                    <img src="./res/images/bot_profile_photo.png" alt="">
+                </div>
+                -->
+        </div>
+        
+        <div id="chat-box-input-container">
+            <input id="input-message" type="text" placeholder="Type a message...">
+            <img id="send-message-btn" src="./res/icons/send_icon.png" alt="Send">
+        
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./scripts/index.js"></script>
+
+</body>
+</html>
