@@ -76,6 +76,16 @@ function botResponse(){
 
         if (lastMessage == '1'){
             resp = `<button class="message chat-button" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Google Classroom</button>`
+        }else if (lastMessage.toLowerCase() == 'get started'){
+            resp = 
+            `
+            <div class="message">
+                Select a VLE Platrform
+                <button class="message chat-button" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Google Classroom</button>
+                <button class="message chat-button" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Moodle</button>
+                <button class="message chat-button" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Schoology</button>
+            </div>
+            `
         }else{
             resp = '<div class="message">Invalid Command</div>';
         }

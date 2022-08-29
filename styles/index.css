@@ -54,10 +54,11 @@
 #chat-box-content-container .new-message .message{
     margin: 5%;
     padding: 2%;
-    border-radius: 5px;
+    border-radius: 10px;
     flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
 }
-
 .user-message {
     justify-content: flex-end;
 }
@@ -66,12 +67,22 @@
     color:  white;
 }
 .bot-message .message{
-    background: rgb(168, 168, 168);
+    background: rgb(192, 192, 192);
 }
-.new-message.chat-button{
-    background: grey;
+.bot-message .chat-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    background: rgb(145, 145, 145);
     box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.8);
-    color: blue;
+    border: 1px solid white;
+    transition: all;
+    transition-duration: .3s;
+}
+.chat-button:hover{
+    transform: translateY(-2px);
+    box-shadow: 1px 4px 3px 0px rgba(0,0,0,0.8);
 }
 #chat-box-input-container{
     height: 15%;
