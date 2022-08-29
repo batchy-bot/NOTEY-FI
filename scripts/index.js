@@ -102,7 +102,7 @@ function botResponse(){
                 let platformName = btn.innerHTML.split('Sign-in to')
                 platformName = platformName[platformName.length - 1]
                 addNewMessage('bot', `<div class='message'>You have successfully signed in to \n'${platformName}'</div>`, 'receive');
-                addNewMessage('bot', `<div class='message'>You will now receive notifications activities, announcements and quizzes from '${platformName}'</div>`, 'receive');
+                addNewMessage('bot', `<div class='message'>You will now receive notifications from activities, announcements and quizzes from '${platformName}'</div>`, 'receive');
             });
         });
     }, 1000);
