@@ -126,5 +126,6 @@ body{
     #chat-box-container{
         bottom: 0;
         right: inherit;
+        height: 70%;
     }
   }
