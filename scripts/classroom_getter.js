@@ -8,7 +8,9 @@ const { json } = require("body-parser");
 // If modifying these scopes, delete token.json.
 const SCOPES = [
   "https://www.googleapis.com/auth/classroom.courses.readonly",
+  "https://www.googleapis.com/auth/classroom.courses",
   "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
+  "https://www.googleapis.com/auth/classroom.coursework.me",
 ];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
@@ -95,12 +97,22 @@ async function listCourses(auth) {
   courses.forEach((course) => {
     // Print course name and course id
     console.log(`${course.name} (${course.id})`);
+
     // Get courseWorks of each course
     const courseWorks = classroom.courses.courseWork.list({
       courseId: course.id,
     });
+
     courseWorks.then((result) => {
 
+      console.log('COURSE: '+course.name)
+      for(let s in result.data){
+        for(let k in result.data[s]){
+          console.log(result.data[s][k]['state'])
+          console.log('\n==============================')
+        }
+        
+      }
       courseData.push(result.data);
 
     });
