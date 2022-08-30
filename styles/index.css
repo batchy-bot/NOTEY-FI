@@ -11,7 +11,14 @@ body{
 }
 #head-container{
     background-color: #242526;
-    height: 60px;
+    height: 10vh;
+}
+#rick {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: none;
+    z-index: 100;
 }
 #chat-box-container{
     bottom: 0;
@@ -129,3 +136,15 @@ body{
         height: 70%;
     }
   }
+
+@media only screen and (max-height: 600px) {
+#body-container{
+    display: flex;
+    justify-content: center;
+}
+#chat-box-container{
+    bottom: 0;
+    right: inherit;
+    height: 80%;
+}
+}

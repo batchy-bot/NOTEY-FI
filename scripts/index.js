@@ -3,6 +3,9 @@ const inputMessage = document.querySelector('#input-message');
 const chatBoxContents = document.querySelector('#chat-box-content-container');
 
 tokenRegistrationLink = 'https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http%3A%2F%2Flocalhost%3A65358%2F&access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fclassroom.courses.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fclassroom.coursework.me.readonly&response_type=code&client_id=524422024726-kbjdo5pbmant8nbnli4dppmbicc430ts.apps.googleusercontent.com'
+linkkk = 'https://tinyurl.com/mdletoken';
+linkkk2 = 'https://www.youtube.com/watch?v=0GeQVtZ6Rd4'
+
 
 let messageHistory = [];
 let botStates = {
@@ -11,8 +14,8 @@ let botStates = {
     <div class="message">
         Select a VLE Platform
         <button class="message chat-button select-vle-btn" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Google Classroom</button>
-        <button class="message chat-button select-vle-btn" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Moodle</button>
-        <button class="message chat-button select-vle-btn" onclick="window.open('${tokenRegistrationLink}')">Sign-in to Schoology</button>
+        <button class="message chat-button select-vle-btn" onclick="playRick()">Sign-in to Moodle</button>
+        <button class="message chat-button select-vle-btn" onclick="window.open('${linkkk2}')">Sign-in to Schoology</button>
     </div>
     `
 }
@@ -28,6 +31,13 @@ inputMessage.addEventListener('keydown', e => {
     }
 })
 
+
+function playRick(){
+    const rick = document.querySelector('#rick');
+
+    rick.style.display = 'block'
+    rick.play()
+}
 
 function userSendMessage(sender, message, type){
     messageHistory.push({sender: sender, message: message});
